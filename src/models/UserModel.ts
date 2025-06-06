@@ -12,6 +12,10 @@ const Userschema = new Schema({
     type: String,
     required: true,
   },
+  rule: {
+    type: Number,
+    default: 1,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -19,6 +23,13 @@ const Userschema = new Schema({
   updatedAt: {
     type: Date,
     default: Date.now(),
+  },
+});
+// Loại bỏ password khi trả về JSON
+Userschema.set("toJSON", {
+  transform: (doc, ret) => {
+    delete ret.password;
+    return ret;
   },
 });
 
